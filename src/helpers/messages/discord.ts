@@ -2,18 +2,21 @@ type DiscordMessagePriority = "LOW" | "MEDIUM" | "HIGH";
 
 const PRIORITY_CONFIG: Record<
   DiscordMessagePriority,
-  { roleId: string; color: number }
+  { webhook: string; color: number }
 > = {
   LOW: {
-    roleId: "1306310062091796552",
+    webhook:
+      "https://discord.com/api/webhooks/1306295786220425267/RijlaC32peEhgngB6D7fk66HAoZh0vGS-kDXriAptv8sfd8laaOT77BkraXCgBMFas8E",
     color: 0xffeb3b,
   },
   MEDIUM: {
-    roleId: "1306310344498610328",
+    webhook:
+      "https://discord.com/api/webhooks/1306322238353440839/qcxn9jmaR6lrn_pIEmJHXVYUW-fSN_19aaUVhcgXK54WnSJlOa1m96jnzqLvsC_j18IB",
     color: 0xff9100,
   },
   HIGH: {
-    roleId: "1306310381605617677",
+    webhook:
+      "https://discord.com/api/webhooks/1306322322042519562/oEVE8IekgYUKHr3XgQAEvb29ljjyZEssdqj88y3zYK-TtHD_jCs60AuS_23tCyLy_xv7",
     color: 0xf41921,
   },
 };
@@ -21,19 +24,17 @@ const PRIORITY_CONFIG: Record<
 export async function sendDiscordMessage(
   title: string,
   description: string,
-  webhookUrl: string,
   priority: DiscordMessagePriority = "LOW"
 ) {
   const config = PRIORITY_CONFIG[priority];
 
   try {
-    const response = await fetch(webhookUrl, {
+    const response = await fetch(config.webhook, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        content: `<@&${config.roleId}>`,
         embeds: [
           {
             title,
