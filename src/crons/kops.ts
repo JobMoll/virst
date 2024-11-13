@@ -8,15 +8,22 @@ export async function checkKopsPlots() {
     const results = await getPreferredPlot();
 
     sendDiscordMessage(
+      "IN DE VERKOOP 🎉🥳",
       `NUMMER 15 IS IN DE VERKOOP 🎉🥳!! ${results.extraInfoMessage}`,
       kopsDiscordWebhookUrl,
       "HIGH"
     );
   } catch (e) {
     if (e instanceof Error) {
-      sendDiscordMessage(e.message, kopsDiscordWebhookUrl, "LOW");
+      sendDiscordMessage(
+        "Nog geen verkoop 😢",
+        e.message,
+        kopsDiscordWebhookUrl,
+        "LOW"
+      );
     } else {
       sendDiscordMessage(
+        "Oh oh 🫨🫨",
         "Er ging iets mis maar geen idee wat 🫨🫨",
         kopsDiscordWebhookUrl,
         "MEDIUM"

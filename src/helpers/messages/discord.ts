@@ -19,7 +19,8 @@ const PRIORITY_CONFIG: Record<
 };
 
 export async function sendDiscordMessage(
-  message: string,
+  title: string,
+  description: string,
   webhookUrl: string,
   priority: DiscordMessagePriority = "LOW"
 ) {
@@ -32,10 +33,11 @@ export async function sendDiscordMessage(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        content: `<@&${config.roleId}> ${message}`,
+        content: `<@&${config.roleId}>`,
         embeds: [
           {
-            description: message,
+            title,
+            description,
             color: config.color,
             footer: {
               text: `Priority: ${priority}`,
