@@ -3,7 +3,7 @@ import { sendDiscordMessage } from "@/helpers/messages/discord";
 const kopsDiscordWebhookUrl =
   "https://discord.com/api/webhooks/1306295786220425267/RijlaC32peEhgngB6D7fk66HAoZh0vGS-kDXriAptv8sfd8laaOT77BkraXCgBMFas8E";
 
-async function checkKopsPlots() {
+export async function checkKopsPlots() {
   try {
     const results = await getPreferredPlot();
 
@@ -77,5 +77,3 @@ async function getPreferredPlot() {
     extraInfoMessage,
   };
 }
-
-checkKopsPlots();
