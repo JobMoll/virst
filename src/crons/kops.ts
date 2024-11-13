@@ -9,16 +9,19 @@ export async function checkKopsPlots() {
 
     sendDiscordMessage(
       `NUMMER 15 IS IN DE VERKOOP 🎉🥳!! ${results.extraInfoMessage}`,
-      kopsDiscordWebhookUrl
+      kopsDiscordWebhookUrl,
+      "HIGH"
     );
   } catch (e) {
-    let message = "Er ging iets mis maar geen idee wat 🫨🫨";
-
     if (e instanceof Error) {
-      message = e.message;
+      sendDiscordMessage(e.message, kopsDiscordWebhookUrl, "LOW");
+    } else {
+      sendDiscordMessage(
+        "Er ging iets mis maar geen idee wat 🫨🫨",
+        kopsDiscordWebhookUrl,
+        "MEDIUM"
+      );
     }
-
-    sendDiscordMessage(message, kopsDiscordWebhookUrl);
   }
 }
 
